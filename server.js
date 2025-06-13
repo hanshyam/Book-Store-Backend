@@ -15,7 +15,7 @@ connectDB();
 
 // Middlewares
 app.use(cors({
-  origin: 'http://localhost:5174', // frontend URL
+  origin: 'https://book-store-frontend-git-main-ghanshyam-patidars-projects.vercel.app', // frontend URL
   credentials: true
 }));
 app.use(express.json({ limit: '10mb' }));
