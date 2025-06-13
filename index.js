@@ -6,6 +6,7 @@ import { connectDB } from './config/db.js';
 import userRouter from './routes/userRoutes.js';
 import bookRouter from './routes/bookRoutes.js';
 import reviewRouter from './routes/reviewRoutes.js';
+import searchRouter from './routes/searchRoute.js';
 
 
 const app = express();
@@ -24,7 +25,8 @@ app.use(express.urlencoded({ limit: '10mb', extended: true }));
 // Routes
 app.use('/api/auth', userRouter);
 app.use('/api/book', bookRouter);
-app.use('/api/review', reviewRouter); // ✅ fixed this line
+app.use('/api/review', reviewRouter);
+app.use('/api/search', searchRouter);
 
 const port = process.env.PORT || 3000;
 

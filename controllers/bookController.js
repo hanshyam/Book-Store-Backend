@@ -1,6 +1,7 @@
 import { bookModel } from "../models/bookModel.js";
 import cloudinary from "../utils/cloudinary.js";
 import reviewModel from "../models/reviewModel.js"; // make sure this path is correct
+import Search from "../models/searchModel.js";
 
 // add a Book
 export const addBook = async (req, res) => {
@@ -24,6 +25,20 @@ export const addBook = async (req, res) => {
    }
    console.log("After image uploading");
     const newBook = await bookModel.create(bookData);
+
+    const searchTitle = await Search.find({text:title});
+    if(!searchTitle){
+       await Search.create({text:title});
+    }
+    const searchAuthor = await Search.find({text:author});
+    if(!searchAuthor){
+       await Search.create({text:author});
+    }
+    const searchGenre = await Search.find({text:genre});
+    if(!searchGenre){
+       await Search.create({text:genre});
+    }
+
     res.status(201).json({ success: true, bookData: newBook });
   } catch (error) {
     console.error(error);
