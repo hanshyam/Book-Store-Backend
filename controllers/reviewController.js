@@ -98,7 +98,7 @@ export const addDislike = async (req, res) => {
 
     const review = await reviewModel.findById(reviewId);
     if (!review) {
-      return res.status(404).json({success:true,reviewData:[],message: 'Review not found' });
+      return res.status(404).json({message: 'Review not found' });
     }
 
     const userIdStr = userId.toString();
@@ -144,6 +144,9 @@ export const getReviews = async (req, res) => {
 
     if (reviews && reviews.length > 0) {
       return res.status(200).json({ success: true, reviewData: reviews });
+    }
+    if(reviews.length===0){
+      return res.status(200).json({ success: true, reviewData: [] });
     }
 
     return res.status(404).json({ success: false, message: "No reviews found for this book" });
